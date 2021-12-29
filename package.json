@@ -1,0 +1,33 @@
+{
+  "name": "@hexlet/code",
+  "version": "0.0.1",
+  "description": "[![Actions Status](https://github.com/sarmong/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/sarmong/frontend-project-lvl2/actions)",
+  "type": "module",
+  "bin": {
+    "gendiff": "./bin/gendiff.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "prettier --check src/**/* bin/**/* --no-error-on-unmatched-pattern",
+    "lint": "eslint --cache --ext .js, src/ bin/ --no-error-on-unmatched-pattern",
+    "lint:fix": "npm run lint -- --fix",
+    "validate": "npm run prettier && npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sarmong/frontend-project-lvl2.git"
+  },
+  "author": "michael",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sarmong/frontend-project-lvl2/issues"
+  },
+  "homepage": "https://github.com/sarmong/frontend-project-lvl2#readme",
+  "dependencies": {
+    "commander": "^8.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.5.0",
+    "eslint-config-prettier": "^8.3.0"
+  }
+}
