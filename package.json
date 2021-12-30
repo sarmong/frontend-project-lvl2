@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "[![Actions Status](https://github.com/sarmong/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/sarmong/frontend-project-lvl2/actions)",
   "type": "module",
+  "main": "src/index.js",
   "bin": {
     "gendiff": "./bin/gendiff.js"
   },
@@ -24,10 +25,12 @@
   },
   "homepage": "https://github.com/sarmong/frontend-project-lvl2#readme",
   "dependencies": {
-    "commander": "^8.3.0"
+    "commander": "^8.3.0",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "eslint": "^8.5.0",
-    "eslint-config-prettier": "^8.3.0"
+    "eslint-config-prettier": "^8.3.0",
+    "prettier": "^2.5.1"
   }
 }
