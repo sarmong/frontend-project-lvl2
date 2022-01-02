@@ -1,15 +1,10 @@
-import fs from "fs";
-import path from "path";
 import _ from "lodash";
 
-const readJsonFile = (filepath) => {
-  const file = fs.readFileSync(path.resolve(process.cwd(), filepath));
-  return JSON.parse(file);
-};
+import { parseFile } from "./parsers/index.js";
 
 export const genDiff = (filepath1, filepath2) => {
-  const file1 = readJsonFile(filepath1);
-  const file2 = readJsonFile(filepath2);
+  const file1 = parseFile(filepath1);
+  const file2 = parseFile(filepath2);
   const keys1 = _.keys(file1);
   const keys2 = _.keys(file2);
   const keys = _.sortBy(_.union(keys1, keys2));
