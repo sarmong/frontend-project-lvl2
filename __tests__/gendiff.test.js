@@ -22,4 +22,14 @@ describe("genDiff", () => {
 
     expect(res).toMatchSnapshot();
   });
+
+  it("should show correct diff in plain format", () => {
+    const res = genDiff(
+      `${fixturesPath}/file1.yaml`,
+      `${fixturesPath}/file2.yaml`,
+      "plain"
+    );
+
+    expect(res).toMatchSnapshot();
+  });
 });
