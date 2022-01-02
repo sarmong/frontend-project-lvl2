@@ -3,7 +3,7 @@ import _ from "lodash";
 const generateStylishObj = (diff, obj1, obj2) => {
   return _.entries(diff).reduce((acc, [key, val]) => {
     if (_.isObject(val)) {
-      acc[key] = generateStylishObj(val, obj1[key], obj2[key]);
+      acc[`  ${key}`] = generateStylishObj(val, obj1[key], obj2[key]);
     } else if (val === "added") {
       acc[`+ ${key}`] = obj2[key];
     } else if (val === "deleted") {
@@ -18,7 +18,7 @@ const generateStylishObj = (diff, obj1, obj2) => {
   }, {});
 };
 
-const printStylish = (data, replacer = " ", spacesCount = 4) => {
+const printStylish = (data, replacer = " ", spacesCount = 2) => {
   const iter = (currentValue, depth) => {
     if (!_.isObject(currentValue)) {
       return String(currentValue);
