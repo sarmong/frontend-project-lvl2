@@ -7,7 +7,6 @@ const formatters = {
   json: JSON.stringify,
 };
 
-const format = (diff, obj1, obj2, formatType = "stylish") =>
-  formatters[formatType](diff, obj1, obj2);
+const format = (diff, formatType = "stylish") => formatters[formatType](diff);
 
 export default format;

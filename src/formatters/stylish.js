@@ -1,18 +1,18 @@
 import _ from "lodash";
 
-const generateStylishObj = (diff, obj1, obj2) => {
-  return _.entries(diff).reduce((acc, [key, val]) => {
-    if (_.isObject(val)) {
-      acc[`  ${key}`] = generateStylishObj(val, obj1[key], obj2[key]);
-    } else if (val === "added") {
-      acc[`+ ${key}`] = obj2[key];
-    } else if (val === "deleted") {
-      acc[`- ${key}`] = obj1[key];
-    } else if (val === "changed") {
-      acc[`- ${key}`] = obj1[key];
-      acc[`+ ${key}`] = obj2[key];
-    } else if (val === "unchanged") {
-      acc[`  ${key}`] = obj2[key];
+const generateStylishObj = (diffTree) => {
+  return _.entries(diffTree).reduce((acc, [key, val]) => {
+    if (val.type === "nested") {
+      acc[`${key}`] = generateStylishObj(val.value);
+    } else if (val.type === "added") {
+      acc[`+ ${key}`] = val.value;
+    } else if (val.type === "deleted") {
+      acc[`- ${key}`] = val.value;
+    } else if (val.type === "changed") {
+      acc[`- ${key}`] = val.valBefore;
+      acc[`+ ${key}`] = val.valAfter;
+    } else if (val.type === "unchanged") {
+      acc[`  ${key}`] = val.value;
     }
     return acc;
   }, {});
@@ -37,8 +37,9 @@ const printStylish = (data, replacer = " ", spacesCount = 2) => {
   return iter(data, 1);
 };
 
-export const formatStylish = (diff, obj1, obj2) => {
-  const stylishObj = generateStylishObj(diff, obj1, obj2);
+export const formatStylish = (diff) => {
+  const stylishObj = generateStylishObj(diff);
+  console.log(stylishObj);
 
   return printStylish(stylishObj);
 };

@@ -2,38 +2,37 @@ import _ from "lodash";
 
 const getPath = (...keys) => keys.join(".");
 
-const getVal = (key, obj) => {
-  if (_.isObject(obj[key])) {
+const getVal = (val) => {
+  if (_.isObject(val)) {
     return "[complex value]";
-  } else if (typeof obj[key] === "string") {
-    return `'${obj[key]}'`;
+  } else if (typeof val === "string") {
+    return `'${val}'`;
   } else {
-    return String(obj[key]);
+    return String(val);
   }
 };
 
-export const formatPlain = (diff, obj1, obj2) => {
-  const iter = (diff, obj1, obj2, path) => {
-    return _.entries(diff).reduce((acc, [key, val]) => {
+export const formatPlain = (diffTree) => {
+  const iter = (diffTree, path) => {
+    return _.entries(diffTree).reduce((acc, [key, val]) => {
       const currentPath = path ? getPath(path, key) : key;
-      if (_.isObject(val)) {
-        acc += iter(val, obj1[key], obj2[key], currentPath);
-      } else if (val === "added") {
+
+      if (val.type === "nested") {
+        acc += iter(val.value, currentPath);
+      } else if (val.type === "added") {
         acc += `Property '${currentPath}' was added with value: ${getVal(
-          key,
-          obj2
+          val.value
         )}\n`;
-      } else if (val === "deleted") {
+      } else if (val.type === "deleted") {
         acc += `Property '${currentPath}' was removed\n`;
-      } else if (val === "changed") {
+      } else if (val.type === "changed") {
         acc += `Property '${currentPath}' was updated. From ${getVal(
-          key,
-          obj1
-        )} to ${getVal(key, obj2)}\n`;
+          val.valBefore
+        )} to ${getVal(val.valAfter)}\n`;
       }
       return acc;
     }, ``);
   };
 
-  return iter(diff, obj1, obj2);
+  return iter(diffTree);
 };
