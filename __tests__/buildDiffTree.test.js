@@ -6,42 +6,122 @@ import { parseFile } from "../src/parsers";
 const fixturesPath = "__tests__/__fixtures__";
 
 const result = {
-  common: {
-    type: "nested",
-    value: {
-      follow: { type: "added", value: false },
-      setting1: { type: "unchanged", value: "Value 1" },
-      setting2: { type: "deleted", value: 200 },
-      setting3: { type: "changed", valBefore: true, valAfter: null },
-      setting4: { type: "added", value: "blah blah" },
-      setting5: { type: "added", value: { key5: "value5" } },
-      setting6: {
-        type: "nested",
-        value: {
-          doge: {
-            type: "nested",
-            value: {
-              wow: { type: "changed", valBefore: "", valAfter: "so much" },
+  type: "root",
+  value: {
+    common: {
+      key: "common",
+      type: "nested",
+      value: {
+        follow: {
+          key: "follow",
+          type: "added",
+          value: false,
+        },
+        setting1: {
+          key: "setting1",
+          type: "unchanged",
+          value: "Value 1",
+        },
+        setting2: {
+          key: "setting2",
+          type: "deleted",
+          value: 200,
+        },
+        setting3: {
+          key: "setting3",
+          type: "changed",
+          valAfter: null,
+          valBefore: true,
+        },
+        setting4: {
+          key: "setting4",
+          type: "added",
+          value: "blah blah",
+        },
+        setting5: {
+          key: "setting5",
+          type: "added",
+          value: {
+            key5: "value5",
+          },
+        },
+        setting6: {
+          key: "setting6",
+          type: "nested",
+          value: {
+            doge: {
+              key: "doge",
+              type: "nested",
+              value: {
+                wow: {
+                  key: "wow",
+                  type: "changed",
+                  valAfter: "so much",
+                  valBefore: "",
+                },
+              },
+            },
+            key: {
+              key: "key",
+              type: "unchanged",
+              value: "value",
+            },
+            ops: {
+              key: "ops",
+              type: "added",
+              value: "vops",
             },
           },
-          key: { type: "unchanged", value: "value" },
-          ops: { type: "added", value: "vops" },
         },
       },
     },
-  },
-  group1: {
-    type: "nested",
-    value: {
-      baz: { type: "changed", valBefore: "bas", valAfter: "bars" },
-      foo: { type: "unchanged", value: "bar" },
-      nest: { type: "changed", valBefore: { key: "value" }, valAfter: "str" },
+    group1: {
+      key: "group1",
+      type: "nested",
+      value: {
+        baz: {
+          key: "baz",
+          type: "changed",
+          valAfter: "bars",
+          valBefore: "bas",
+        },
+        foo: {
+          key: "foo",
+          type: "unchanged",
+          value: "bar",
+        },
+        nest: {
+          key: "nest",
+          type: "changed",
+          valAfter: "str",
+          valBefore: {
+            key: "value",
+          },
+        },
+      },
     },
-  },
-  group2: { type: "deleted", value: { abc: 12345, deep: { id: 45 } } },
-  group3: {
-    type: "added",
-    value: { deep: { id: { number: 45 } }, fee: 100500 },
+    group2: {
+      key: "group2",
+      type: "deleted",
+      value: {
+        abc: 12345,
+        deep: {
+          id: 45,
+        },
+      },
+    },
+    group3: {
+      key: "group3",
+      type: "added",
+      value: {
+        deep: {
+          id: {
+            number: 45,
+          },
+        },
+        fee: 100500,
+      },
+    },
   },
 };
 

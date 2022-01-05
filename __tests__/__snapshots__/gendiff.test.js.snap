@@ -2,99 +2,99 @@
 
 exports[`genDiff should show correct diff for json files 1`] = `
 "{
-  common: {
-    + follow: false
-      setting1: Value 1
-    - setting2: 200
-    - setting3: true
-    + setting3: null
-    + setting4: blah blah
-    + setting5: {
-      key5: value5
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow: 
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
     }
-    setting6: {
-      doge: {
-        - wow: 
-        + wow: so much
-      }
-        key: value
-      + ops: vops
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
     }
-  }
-  group1: {
-    - baz: bas
-    + baz: bars
-      foo: bar
-    - nest: {
-      key: value
-    }
-    + nest: str
-  }
   - group2: {
-    abc: 12345
-    deep: {
-      id: 45
+        abc: 12345
+        deep: {
+            id: 45
+        }
     }
-  }
   + group3: {
-    deep: {
-      id: {
-        number: 45
-      }
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+        fee: 100500
     }
-    fee: 100500
-  }
 }"
 `;
 
 exports[`genDiff should show correct diff for yaml files 1`] = `
 "{
-  common: {
-    + follow: false
-      setting1: Value 1
-    - setting2: 200
-    - setting3: true
-    + setting3: null
-    + setting4: blah blah
-    + setting5: {
-      key5: value5
+    common: {
+      + follow: false
+        setting1: Value 1
+      - setting2: 200
+      - setting3: true
+      + setting3: null
+      + setting4: blah blah
+      + setting5: {
+            key5: value5
+        }
+        setting6: {
+            doge: {
+              - wow: 
+              + wow: so much
+            }
+            key: value
+          + ops: vops
+        }
     }
-    setting6: {
-      doge: {
-        - wow: 
-        + wow: so much
-      }
-        key: value
-      + ops: vops
+    group1: {
+      - baz: bas
+      + baz: bars
+        foo: bar
+      - nest: {
+            key: value
+        }
+      + nest: str
     }
-  }
-  group1: {
-    - baz: bas
-    + baz: bars
-      foo: bar
-    - nest: {
-      key: value
-    }
-    + nest: str
-  }
   - group2: {
-    abc: 12345
-    deep: {
-      id: 45
+        abc: 12345
+        deep: {
+            id: 45
+        }
     }
-  }
   + group3: {
-    deep: {
-      id: {
-        number: 45
-      }
+        deep: {
+            id: {
+                number: 45
+            }
+        }
+        fee: 100500
     }
-    fee: 100500
-  }
 }"
 `;
 
-exports[`genDiff should show correct diff in json format 1`] = `"{\\"common\\":{\\"type\\":\\"nested\\",\\"value\\":{\\"follow\\":{\\"type\\":\\"added\\",\\"value\\":false},\\"setting1\\":{\\"type\\":\\"unchanged\\",\\"value\\":\\"Value 1\\"},\\"setting2\\":{\\"type\\":\\"deleted\\",\\"value\\":200},\\"setting3\\":{\\"type\\":\\"changed\\",\\"valBefore\\":true,\\"valAfter\\":null},\\"setting4\\":{\\"type\\":\\"added\\",\\"value\\":\\"blah blah\\"},\\"setting5\\":{\\"type\\":\\"added\\",\\"value\\":{\\"key5\\":\\"value5\\"}},\\"setting6\\":{\\"type\\":\\"nested\\",\\"value\\":{\\"doge\\":{\\"type\\":\\"nested\\",\\"value\\":{\\"wow\\":{\\"type\\":\\"changed\\",\\"valBefore\\":\\"\\",\\"valAfter\\":\\"so much\\"}}},\\"key\\":{\\"type\\":\\"unchanged\\",\\"value\\":\\"value\\"},\\"ops\\":{\\"type\\":\\"added\\",\\"value\\":\\"vops\\"}}}}},\\"group1\\":{\\"type\\":\\"nested\\",\\"value\\":{\\"baz\\":{\\"type\\":\\"changed\\",\\"valBefore\\":\\"bas\\",\\"valAfter\\":\\"bars\\"},\\"foo\\":{\\"type\\":\\"unchanged\\",\\"value\\":\\"bar\\"},\\"nest\\":{\\"type\\":\\"changed\\",\\"valBefore\\":{\\"key\\":\\"value\\"},\\"valAfter\\":\\"str\\"}}},\\"group2\\":{\\"type\\":\\"deleted\\",\\"value\\":{\\"abc\\":12345,\\"deep\\":{\\"id\\":45}}},\\"group3\\":{\\"type\\":\\"added\\",\\"value\\":{\\"deep\\":{\\"id\\":{\\"number\\":45}},\\"fee\\":100500}}}"`;
+exports[`genDiff should show correct diff in json format 1`] = `"{\\"type\\":\\"root\\",\\"value\\":{\\"common\\":{\\"key\\":\\"common\\",\\"type\\":\\"nested\\",\\"value\\":{\\"follow\\":{\\"key\\":\\"follow\\",\\"type\\":\\"added\\",\\"value\\":false},\\"setting1\\":{\\"key\\":\\"setting1\\",\\"type\\":\\"unchanged\\",\\"value\\":\\"Value 1\\"},\\"setting2\\":{\\"key\\":\\"setting2\\",\\"type\\":\\"deleted\\",\\"value\\":200},\\"setting3\\":{\\"key\\":\\"setting3\\",\\"type\\":\\"changed\\",\\"valBefore\\":true,\\"valAfter\\":null},\\"setting4\\":{\\"key\\":\\"setting4\\",\\"type\\":\\"added\\",\\"value\\":\\"blah blah\\"},\\"setting5\\":{\\"key\\":\\"setting5\\",\\"type\\":\\"added\\",\\"value\\":{\\"key5\\":\\"value5\\"}},\\"setting6\\":{\\"key\\":\\"setting6\\",\\"type\\":\\"nested\\",\\"value\\":{\\"doge\\":{\\"key\\":\\"doge\\",\\"type\\":\\"nested\\",\\"value\\":{\\"wow\\":{\\"key\\":\\"wow\\",\\"type\\":\\"changed\\",\\"valBefore\\":\\"\\",\\"valAfter\\":\\"so much\\"}}},\\"key\\":{\\"key\\":\\"key\\",\\"type\\":\\"unchanged\\",\\"value\\":\\"value\\"},\\"ops\\":{\\"key\\":\\"ops\\",\\"type\\":\\"added\\",\\"value\\":\\"vops\\"}}}}},\\"group1\\":{\\"key\\":\\"group1\\",\\"type\\":\\"nested\\",\\"value\\":{\\"baz\\":{\\"key\\":\\"baz\\",\\"type\\":\\"changed\\",\\"valBefore\\":\\"bas\\",\\"valAfter\\":\\"bars\\"},\\"foo\\":{\\"key\\":\\"foo\\",\\"type\\":\\"unchanged\\",\\"value\\":\\"bar\\"},\\"nest\\":{\\"key\\":\\"nest\\",\\"type\\":\\"changed\\",\\"valBefore\\":{\\"key\\":\\"value\\"},\\"valAfter\\":\\"str\\"}}},\\"group2\\":{\\"key\\":\\"group2\\",\\"type\\":\\"deleted\\",\\"value\\":{\\"abc\\":12345,\\"deep\\":{\\"id\\":45}}},\\"group3\\":{\\"key\\":\\"group3\\",\\"type\\":\\"added\\",\\"value\\":{\\"deep\\":{\\"id\\":{\\"number\\":45}},\\"fee\\":100500}}}}"`;
 
 exports[`genDiff should show correct diff in plain format 1`] = `
 "Property 'common.follow' was added with value: false

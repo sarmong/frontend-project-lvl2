@@ -15,18 +15,18 @@ const getVal = (val) => {
 export const formatPlain = (diffTree) => {
   const iter = (diffTree, path) => {
     return _.entries(diffTree).reduce((acc, [key, val]) => {
-      const currentPath = path ? getPath(path, key) : key;
+      const propPath = path ? getPath(path, key) : key;
 
       if (val.type === "nested") {
-        acc += iter(val.value, currentPath);
+        acc += iter(val.value, propPath);
       } else if (val.type === "added") {
-        acc += `Property '${currentPath}' was added with value: ${getVal(
+        acc += `Property '${propPath}' was added with value: ${getVal(
           val.value
         )}\n`;
       } else if (val.type === "deleted") {
-        acc += `Property '${currentPath}' was removed\n`;
+        acc += `Property '${propPath}' was removed\n`;
       } else if (val.type === "changed") {
-        acc += `Property '${currentPath}' was updated. From ${getVal(
+        acc += `Property '${propPath}' was updated. From ${getVal(
           val.valBefore
         )} to ${getVal(val.valAfter)}\n`;
       }
@@ -34,5 +34,5 @@ export const formatPlain = (diffTree) => {
     }, ``);
   };
 
-  return iter(diffTree);
+  return iter(diffTree.value);
 };

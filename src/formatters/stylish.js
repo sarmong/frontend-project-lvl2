@@ -1,45 +1,57 @@
 import _ from "lodash";
 
-const generateStylishObj = (diffTree) => {
-  return _.entries(diffTree).reduce((acc, [key, val]) => {
-    if (val.type === "nested") {
-      acc[`${key}`] = generateStylishObj(val.value);
-    } else if (val.type === "added") {
-      acc[`+ ${key}`] = val.value;
-    } else if (val.type === "deleted") {
-      acc[`- ${key}`] = val.value;
-    } else if (val.type === "changed") {
-      acc[`- ${key}`] = val.valBefore;
-      acc[`+ ${key}`] = val.valAfter;
-    } else if (val.type === "unchanged") {
-      acc[`  ${key}`] = val.value;
-    }
-    return acc;
-  }, {});
-};
+const getIndent = (depth, spacesCount = 4) =>
+  " ".repeat(depth * spacesCount - 2);
 
-const printStylish = (data, replacer = " ", spacesCount = 2) => {
-  const iter = (currentValue, depth) => {
-    if (!_.isObject(currentValue)) {
-      return String(currentValue);
-    }
-
-    const indentSize = depth * spacesCount;
-    const currentIndent = replacer.repeat(indentSize);
-    const bracketIndent = replacer.repeat(indentSize - spacesCount);
-    const lines = Object.entries(currentValue).map(
-      ([key, val]) => `${currentIndent}${key}: ${iter(val, depth + 1)}`
+const lines = {
+  root: (node, depth, iter) => {
+    const children = _.values(node.value).flatMap((node) =>
+      lines[node.type](node, depth + 1, iter)
     );
-
-    return ["{", ...lines, `${bracketIndent}}`].join("\n");
-  };
-
-  return iter(data, 1);
+    return `{\n${children.join("\n")}\n}`;
+  },
+  nested: (node, depth, iter) => {
+    const indent = getIndent(depth);
+    const children = _.values(node.value).flatMap((node) =>
+      lines[node.type](node, depth + 1, iter)
+    );
+    return `${indent}  ${node.key}: {\n${children.join("\n")}\n${indent}  }`;
+  },
+  added: (node, depth) =>
+    `${getIndent(depth)}+ ${node.key}: ${getLine(node.value, depth)}`,
+  deleted: (node, depth) =>
+    `${getIndent(depth)}- ${node.key}: ${getLine(node.value, depth)}`,
+  changed: (node, depth) => [
+    `${getIndent(depth)}- ${node.key}: ${getLine(node.valBefore, depth)}`,
+    `${getIndent(depth)}+ ${node.key}: ${getLine(node.valAfter, depth)}`,
+  ],
+  unchanged: (node, depth) =>
+    `${getIndent(depth)}  ${node.key}: ${getLine(node.value, depth)}`,
 };
 
-export const formatStylish = (diff) => {
-  const stylishObj = generateStylishObj(diff);
-  console.log(stylishObj);
+const getLine = (value, depth) => {
+  if (
+    _.isEqual(value, {
+      abc: 12345,
+      deep: {
+        id: 45,
+      },
+    })
+  ) {
+    console.log(value, depth);
+  }
+  if (!_.isObject(value)) {
+    return String(value);
+  }
 
-  return printStylish(stylishObj);
+  const children = _.entries(value).map(([key, value]) =>
+    lines.unchanged({ key, value }, depth + 1)
+  );
+
+  return `{\n${children.join("\n")}\n${getIndent(depth)}  }`;
+};
+
+export const formatStylish = (diffTree) => {
+  const iter = (node, depth) => lines[node.type](node, depth, iter);
+  return iter(diffTree, 0);
 };
