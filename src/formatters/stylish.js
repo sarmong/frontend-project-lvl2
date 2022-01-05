@@ -30,16 +30,6 @@ const lines = {
 };
 
 const getLine = (value, depth) => {
-  if (
-    _.isEqual(value, {
-      abc: 12345,
-      deep: {
-        id: 45,
-      },
-    })
-  ) {
-    console.log(value, depth);
-  }
   if (!_.isObject(value)) {
     return String(value);
   }
