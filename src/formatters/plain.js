@@ -1,3 +1,4 @@
+/* eslint-disable fp/no-rest-parameters */
 import _ from 'lodash';
 
 const getPath = (...keys) => keys.join('.');

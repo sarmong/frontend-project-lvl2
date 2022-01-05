@@ -1,3 +1,4 @@
+/* eslint-disable fp/no-mutation */
 import _ from 'lodash';
 
 const buildDiffTree = (data1, data2) => {
