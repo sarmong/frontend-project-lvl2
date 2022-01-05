@@ -1,43 +1,50 @@
-import { describe, it, expect } from "@jest/globals";
+import { fileURLToPath } from 'url';
+import path from 'path';
 
-import genDiff from "../src/index";
+import { describe, it, expect } from '@jest/globals';
 
-const fixturesPath = "__tests__/__fixtures__";
+import genDiff from '../src/index.js';
 
-describe("genDiff", () => {
-  it("should show correct diff for json files", () => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const getFixturePath = (filename) =>
+  path.join(__dirname, '__fixtures__', filename);
+
+describe('genDiff', () => {
+  it('should show correct diff for json files', () => {
     const res = genDiff(
-      `${fixturesPath}/file1.json`,
-      `${fixturesPath}/file2.json`
+      getFixturePath('file1.json'),
+      getFixturePath('file2.json'),
     );
 
     expect(res).toMatchSnapshot();
   });
 
-  it("should show correct diff for yaml files", () => {
+  it('should show correct diff for yaml files', () => {
     const res = genDiff(
-      `${fixturesPath}/file1.yaml`,
-      `${fixturesPath}/file2.yaml`
+      getFixturePath('file1.yaml'),
+      getFixturePath('file2.yaml'),
     );
 
     expect(res).toMatchSnapshot();
   });
 
-  it("should show correct diff in plain format", () => {
+  it('should show correct diff in plain format', () => {
     const res = genDiff(
-      `${fixturesPath}/file1.yaml`,
-      `${fixturesPath}/file2.yaml`,
-      "plain"
+      getFixturePath('file1.yaml'),
+      getFixturePath('file2.yaml'),
+      'plain',
     );
 
     expect(res).toMatchSnapshot();
   });
 
-  it("should show correct diff in json format", () => {
+  it('should show correct diff in json format', () => {
     const res = genDiff(
-      `${fixturesPath}/file1.yaml`,
-      `${fixturesPath}/file2.yaml`,
-      "json"
+      getFixturePath('file1.yaml'),
+      getFixturePath('file2.yaml'),
+      'json',
     );
 
     expect(res).toMatchSnapshot();
