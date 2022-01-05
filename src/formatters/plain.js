@@ -34,6 +34,7 @@ const formatPlain = (diffTree) => {
       )} to ${getVal(val.valAfter)}`;
     }
 
+    // eslint-disable-next-line fp/no-nil
     return null;
   });
 

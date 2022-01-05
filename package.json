@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest",
     "prettier": "prettier --check src/**/* bin/**/* --no-error-on-unmatched-pattern",
-    "lint": "eslint --cache --ext .js, src/ bin/ --no-error-on-unmatched-pattern",
+    "lint": "eslint --cache --ext .js, src/ --no-error-on-unmatched-pattern",
     "lint:fix": "npm run lint -- --fix",
     "validate": "npm run prettier && npm run lint"
   },
@@ -34,6 +34,7 @@
     "eslint": "^8.5.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-fp": "^2.3.0",
     "eslint-plugin-jest": "^25.3.4",
     "jest": "^27.4.5",
     "prettier": "^2.5.1"
